@@ -6,12 +6,13 @@
 /*   By: ymiyakos <ymiyakos@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 13:31:08 by ymiyakos          #+#    #+#             */
-/*   Updated: 2026/10/25 17:18:39 by ymiyakos         ###   ########.fr       */
+/*   Updated: 2026/10/25 19:32:14 by ymiyakos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <unistd.h>
+#include <stdint.h>
 
 int	ft_putchar(char c)
 {
@@ -21,7 +22,7 @@ int	ft_putchar(char c)
 int	ft_putstr(const char *s)
 {
 	if (!s)
-		return (write(1, "(null)", 6));
+		return (write(1, "(nil)", 5));
 	return (write(1, s, ft_strlen(s)));
 }
 
@@ -64,4 +65,26 @@ int	ft_putnbr(long long nbr)
 	if (result < 0)
 		return (-1);
 	return (total + result);
+}
+
+int	ft_putptr(va_list *ap)
+{
+	uintptr_t	ptr;
+	int			total;
+	int			result;
+
+	ptr = (uintptr_t)va_arg(*ap, void *);
+	if (!ptr)
+		return (ft_putstr(NULL));
+	total = 0;
+	result = 0;
+	result = ft_putstr("0x");
+	if (result < 0)
+		return (-1);
+	total += result;
+	result = ft_putunbr(ptr, "0123456789abcdef");
+	if (result < 0)
+		return (-1);
+	total += result;
+	return (total);
 }
