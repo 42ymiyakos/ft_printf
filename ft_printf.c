@@ -6,7 +6,7 @@
 /*   By: ymiyakos <ymiyakos@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 11:00:22 by ymiyakos          #+#    #+#             */
-/*   Updated: 2026/10/25 19:35:25 by ymiyakos         ###   ########.fr       */
+/*   Updated: 2026/10/26 20:45:16 by ymiyakos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,19 @@ static int	put_args(char spec, va_list *ap)
 	return (-1);
 }
 
-static int	read_format(const char *format)
+static int	read_format(const char **format, va_list *ap)
 {
-	
+	char	c;
+
+	c = **format;
+	++(*format);
+	if (c != '%')
+		return (ft_putchar(c));
+	if (!**format)
+		return (0);
+	c = **format;
+	(*format)++;
+	return (put_args(c, ap));
 }
 
 int	ft_printf(const char *format, ...)
@@ -47,31 +57,18 @@ int	ft_printf(const char *format, ...)
 	va_list	ap;
 
 	total = 0;
-	result = 0;
+	if (!format)
+		return (-1);
 	va_start(ap, format);
 	while (*format)
 	{
-		if (*format != '%')
+		result = read_format(&format, &ap);
+		if (result < 0)
 		{
-			result = ft_putchar(*format);
-			if (result < 0)
-			{
-				va_end(ap);
-				return (-1);
-			}
-			total += result;
+			total = -1;
+			break ;
 		}
-		else if (*(format + 1))
-		{
-			result = put_args(*(++format), &ap);
-			if (result < 0)
-			{
-				va_end(ap);
-				return (-1);
-			}
-			total += result;
-		}
-		++format;
+		total += result;
 	}
 	va_end(ap);
 	return (total);
