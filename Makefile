@@ -11,7 +11,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c ft_printf.h
+%.o: %.c include/ft_printf.h
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 clean:
