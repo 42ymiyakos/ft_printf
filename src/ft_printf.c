@@ -6,7 +6,7 @@
 /*   By: ymiyakos <ymiyakos@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 11:00:22 by ymiyakos          #+#    #+#             */
-/*   Updated: 2026/10/27 11:07:22 by ymiyakos         ###   ########.fr       */
+/*   Updated: 2026/10/27 12:46:20 by ymiyakos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	read_format(const char **format, va_list *ap)
 	if (c != '%')
 		return (ft_putchar(c));
 	if (!**format)
-		return (0);
+		return (-1);
 	c = **format;
 	(*format)++;
 	return (put_args(c, ap));
