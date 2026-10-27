@@ -6,7 +6,7 @@
 /*   By: ymiyakos <ymiyakos@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 13:31:08 by ymiyakos          #+#    #+#             */
-/*   Updated: 2026/10/27 11:02:34 by ymiyakos         ###   ########.fr       */
+/*   Updated: 2026/10/27 11:20:53 by ymiyakos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_putchar(char c)
 int	ft_putstr(const char *s)
 {
 	size_t		remaining;
-	int			max_write_count;
+	size_t		max_write_count;
 	long long	written_total;
 	size_t		min;
 	int			result;

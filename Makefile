@@ -1,9 +1,9 @@
 NAME	= libftprintf.a
-SRCS	= 
+SRCS	= src/ft_printf.c src/puts.c src/utils.c
 OBJS	= $(SRCS:.c=.o)
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
-INCS	= -I.
+INCS	= -I include
 
 .PHONY: all clean fclean re
 all: $(NAME)
