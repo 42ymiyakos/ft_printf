@@ -6,7 +6,7 @@
 /*   By: ymiyakos <ymiyakos@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 10:55:14 by ymiyakos          #+#    #+#             */
-/*   Updated: 2026/10/25 19:24:07 by ymiyakos         ###   ########.fr       */
+/*   Updated: 2026/10/27 10:52:09 by ymiyakos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdarg.h>
 # include <stddef.h>
+# include <limits.h>
 
 int		ft_printf(const char *format, ...);
 

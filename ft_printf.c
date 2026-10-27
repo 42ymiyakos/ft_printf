@@ -6,7 +6,7 @@
 /*   By: ymiyakos <ymiyakos@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 11:00:22 by ymiyakos          #+#    #+#             */
-/*   Updated: 2026/10/26 20:45:16 by ymiyakos         ###   ########.fr       */
+/*   Updated: 2026/10/27 11:07:22 by ymiyakos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		result = read_format(&format, &ap);
-		if (result < 0)
+		if (result < 0 || total > INT_MAX - result)
 		{
 			total = -1;
 			break ;
