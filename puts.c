@@ -6,7 +6,7 @@
 /*   By: ymiyakos <ymiyakos@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 13:31:08 by ymiyakos          #+#    #+#             */
-/*   Updated: 2026/10/26 20:59:59 by ymiyakos         ###   ########.fr       */
+/*   Updated: 2026/10/27 11:02:34 by ymiyakos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,31 @@ int	ft_putchar(char c)
 
 int	ft_putstr(const char *s)
 {
+	size_t		remaining;
+	int			max_write_count;
+	long long	written_total;
+	size_t		min;
+	int			result;
+
 	if (!s)
-		return (write(1, "(nil)", 5));
-	return (write(1, s, ft_strlen(s)));
+		return (write(1, "(null)", 6));
+	remaining = ft_strlen(s);
+	if (remaining > INT_MAX)
+		return (-1);
+	max_write_count = INT_MAX - 4095;
+	written_total = 0;
+	while (remaining > 0)
+	{
+		min = remaining;
+		if (remaining > max_write_count)
+			min = max_write_count;
+		result = write(1, s + written_total, min);
+		if (result < 0)
+			return (-1);
+		written_total += result;
+		remaining -= result;
+	}
+	return (written_total);
 }
 
 int	ft_putunbr(unsigned long unbr, const char *base)
@@ -75,9 +97,8 @@ int	ft_putptr(va_list *ap)
 
 	ptr = (uintptr_t)va_arg(*ap, void *);
 	if (!ptr)
-		return (ft_putstr(NULL));
+		return (ft_putstr("(nil)"));
 	total = 0;
-	result = 0;
 	result = ft_putstr("0x");
 	if (result < 0)
 		return (-1);
